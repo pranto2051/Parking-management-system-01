@@ -22,9 +22,9 @@ interface SlotDetailModalProps {
     slot_number: string;
     unique_slot_id: string;
     slot_type: 'car' | 'bike' | 'truck' | 'bus';
-    status: 'available' | 'booked' | 'occupied';
+    status: 'available' | 'pending' | 'booked' | 'occupied' | 'cancelled' | 'maintenance';
     price_per_month: number;
-    description: string;
+    description?: string;
   } | null;
 }
 

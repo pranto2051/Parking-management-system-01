@@ -237,19 +237,19 @@ export default function LandingPage() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden hero-gradient">
-        {/* Floating orbs */}
-        <div className="orb orb-1" />
-        <div className="orb orb-2" />
-        <div className="orb orb-3" />
+      <section className="relative min-h-screen flex items-center pt-20 overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        {/* Background orbs */}
+        <div className="absolute top-20 left-10 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-pink-500/10 rounded-full blur-[150px]" />
 
-        <div className="absolute inset-0 hero-grid opacity-30" />
+        <div className="absolute inset-0 hero-grid opacity-20" />
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8 animate-in slide-in-from-left duration-700">
-              <Badge className="px-4 py-2 text-sm bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 border border-indigo-500/30 text-indigo-300 backdrop-blur-sm">
-                <Zap className="h-3 w-3 mr-2 fill-indigo-400" />
+              <Badge className="px-5 py-2.5 text-sm bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 border border-indigo-500/30 text-indigo-300 backdrop-blur-sm shadow-lg shadow-indigo-500/10">
+                <Zap className="h-4 w-4 mr-2 fill-indigo-400" />
                 Bangladesh&apos;s Premier Parking Solution
               </Badge>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] tracking-tight">
@@ -258,39 +258,39 @@ export default function LandingPage() {
                   Faster Nation
                 </span>
               </h1>
-              <p className="text-xl text-slate-400 max-w-xl leading-relaxed">
+              <p className="text-xl text-gray-400 max-w-xl leading-relaxed">
                 Find, Book, and Manage Parking Slots Across Bangladesh in Seconds. Join the revolution of smart mobility.
               </p>
               <div className="flex flex-col sm:flex-row gap-5">
                 <Link href="/register">
-                  <Button size="lg" className="w-full sm:w-auto text-lg px-8 py-7 shadow-2xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 transition-all duration-300">
+                  <Button size="lg" className="w-full sm:w-auto text-lg px-8 py-7 shadow-2xl shadow-indigo-500/25 hover:shadow-indigo-500/40 hover:scale-105 transition-all duration-300 bg-gradient-to-r from-indigo-500 to-purple-600">
                     Book a Slot Now
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
                 <Link href="/login">
-                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg px-8 py-7 border-slate-600 text-slate-300 hover:bg-slate-800/50 hover:border-indigo-500/50 hover:text-white transition-all duration-300">
+                  <Button size="lg" variant="outline" className="w-full sm:w-auto text-lg px-8 py-7 border-2 border-slate-600 text-gray-300 hover:bg-slate-800/50 hover:border-indigo-500/50 hover:text-white transition-all duration-300 backdrop-blur-sm">
                     Manage Your Zone
                   </Button>
                 </Link>
               </div>
-              <div className="flex items-center gap-6 pt-6 border-t border-slate-800">
+              <div className="flex items-center gap-6 pt-6 border-t border-slate-700">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
-                      className="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 border-4 border-slate-900 flex items-center justify-center text-xs font-bold text-white shadow-lg"
+                      className="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 border-4 border-slate-900 flex items-center justify-center text-xs font-bold text-white shadow-lg ring-2 ring-slate-800"
                     >
                       U{i}
                     </div>
                   ))}
-                  <div className="h-12 w-12 rounded-full bg-slate-800 border-4 border-slate-900 flex items-center justify-center text-xs font-bold text-slate-400">
+                  <div className="h-12 w-12 rounded-full bg-slate-800 border-4 border-slate-900 flex items-center justify-center text-xs font-bold text-gray-400 ring-2 ring-slate-800">
                     +500
                   </div>
                 </div>
                 <div>
                   <p className="font-bold text-lg text-white">500+ Active Users</p>
-                  <p className="text-sm text-slate-400">Trusted by commuters nationwide</p>
+                  <p className="text-sm text-gray-400">Trusted by commuters nationwide</p>
                 </div>
               </div>
             </div>
@@ -299,7 +299,7 @@ export default function LandingPage() {
             <div className="relative group car-showcase">
               <div className="relative z-10 car-3d animate-car-float">
                 {/* Main car display card */}
-                <div className="relative bg-gradient-to-br from-slate-900/80 via-slate-800/60 to-slate-900/80 backdrop-blur-xl rounded-[3rem] p-10 border border-slate-700/50 shadow-2xl">
+                <div className="relative bg-gradient-to-br from-slate-800/90 via-slate-900/80 to-slate-800/90 backdrop-blur-xl rounded-[3rem] p-10 border border-slate-600/50 shadow-2xl shadow-indigo-500/10">
                   {/* Car Illustration */}
                   <div className="relative">
                     {/* Car body */}
@@ -342,27 +342,27 @@ export default function LandingPage() {
 
                     {/* Car details badges */}
                     <div className="flex justify-center gap-6 mt-8">
-                      <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/80 rounded-full border border-slate-700">
+                      <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/80 rounded-full border border-slate-600">
                         <Shield className="h-4 w-4 text-emerald-400" />
-                        <span className="text-xs font-medium text-slate-300">Secure</span>
+                        <span className="text-xs font-medium text-gray-300">Secure</span>
                       </div>
-                      <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/80 rounded-full border border-slate-700">
+                      <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/80 rounded-full border border-slate-600">
                         <Wifi className="h-4 w-4 text-blue-400" />
-                        <span className="text-xs font-medium text-slate-300">Smart</span>
+                        <span className="text-xs font-medium text-gray-300">Smart</span>
                       </div>
-                      <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/80 rounded-full border border-slate-700">
+                      <div className="flex items-center gap-2 px-4 py-2 bg-slate-800/80 rounded-full border border-slate-600">
                         <Battery className="h-4 w-4 text-amber-400" />
-                        <span className="text-xs font-medium text-slate-300">Eco</span>
+                        <span className="text-xs font-medium text-gray-300">Eco</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Live stats */}
-                  <div className="mt-8 pt-6 border-t border-slate-700/50">
+                  <div className="mt-8 pt-6 border-t border-slate-700">
                     <div className="flex items-center justify-between mb-4">
                       <div>
-                        <p className="text-xs font-medium text-slate-500 uppercase tracking-widest">Live Availability</p>
-                        <p className="text-3xl font-bold text-white mt-1">247 <span className="text-lg font-normal text-slate-400">Slots</span></p>
+                        <p className="text-xs font-medium text-gray-500 uppercase tracking-widest">Live Availability</p>
+                        <p className="text-3xl font-bold text-white mt-1">247 <span className="text-lg font-normal text-gray-400">Slots</span></p>
                       </div>
                       <div className="flex items-center gap-2 bg-emerald-500/20 text-emerald-400 px-4 py-2 rounded-full font-bold text-sm">
                         <div className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -371,7 +371,7 @@ export default function LandingPage() {
                     </div>
                     <div className="space-y-2">
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-slate-400">Occupancy Rate</span>
+                        <span className="text-gray-400">Occupancy Rate</span>
                         <span className="font-bold text-indigo-400">67%</span>
                       </div>
                       <div className="h-2 bg-slate-700 rounded-full overflow-hidden">

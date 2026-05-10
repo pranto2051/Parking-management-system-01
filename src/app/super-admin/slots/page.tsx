@@ -17,9 +17,12 @@ interface Slot {
   slot_number: string;
   unique_slot_id: string;
   zone_id: string;
-  slot_type: "car" | "bike" | "truck";
-  status: "available" | "booked" | "maintenance";
+  slot_type: "car" | "bike" | "truck" | "bus";
+  status: "available" | "pending" | "booked" | "occupied" | "cancelled" | "maintenance";
   price_per_month: number;
+  description?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export default function SlotsPage() {

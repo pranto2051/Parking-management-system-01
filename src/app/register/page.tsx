@@ -148,98 +148,105 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden bg-background">
+    <div className="min-h-screen flex relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+      {/* Background orbs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-[150px]" />
+
       {/* Mouse Glow Effect */}
-      <div 
+      <div
         className="mouse-glow hidden lg:block"
-        style={{ 
-          left: mousePosition.x, 
-          top: mousePosition.y 
+        style={{
+          left: mousePosition.x,
+          top: mousePosition.y
         }}
       />
 
       {/* Left Panel - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 bg-mesh opacity-40" />
-        <div className="absolute inset-0 bg-dots opacity-20" />
-        <div className="relative z-10 flex flex-col justify-center items-center w-full p-20 text-white space-y-12">
+      <div className="hidden lg:flex lg:w-[45%] bg-gradient-to-b from-slate-800/80 to-slate-900/80 relative overflow-hidden border-r border-slate-700">
+        <div className="absolute inset-0 bg-grid opacity-10" />
+        <div className="relative z-10 flex flex-col justify-center items-center w-full p-8 text-white space-y-6">
           <div className="animate-float">
-            <div className="h-24 w-24 rounded-[2rem] bg-white/20 backdrop-blur-xl border border-white/30 flex items-center justify-center shadow-2xl">
-              <Car className="h-12 w-12 text-white" />
+            <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-xl shadow-indigo-500/30">
+              <Car className="h-8 w-8 text-white" />
             </div>
           </div>
-          <div className="text-center space-y-6">
-            <h1 className="text-6xl font-black tracking-tighter">
-              Join Park<span className="text-accent">BD</span>
+          <div className="text-center space-y-2">
+            <h1 className="text-4xl font-black tracking-tighter">
+              Join Park<span className="animated-gradient-text">BD</span>
             </h1>
-            <p className="text-xl text-primary-foreground/90 max-w-md leading-relaxed font-medium">
+            <p className="text-sm text-gray-400 max-w-sm font-medium">
               Start your journey today. Find the perfect slot or manage your own parking zone with ease.
             </p>
           </div>
-          
-          <div className="space-y-6 w-full max-w-sm">
+
+          <div className="space-y-3 w-full max-w-xs">
             {[
-              "Real-time slot tracking",
-              "Secure digital payments",
-              "24/7 Premium support",
-              "Verified parking zones"
-            ].map((feature, i) => (
-              <div key={i} className="flex items-center gap-4 group">
-                <div className="h-10 w-10 rounded-xl bg-white/10 flex items-center justify-center group-hover:bg-accent group-hover:scale-110 transition-all">
-                  <CheckCircle2 className="h-5 w-5" />
+              { feature: "Real-time slot tracking", color: "from-blue-500 to-cyan-500" },
+              { feature: "Secure digital payments", color: "from-emerald-500 to-teal-500" },
+              { feature: "24/7 Premium support", color: "from-purple-500 to-pink-500" },
+              { feature: "Verified parking zones", color: "from-amber-500 to-orange-500" }
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-3 group">
+                <div className={`h-8 w-8 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center group-hover:scale-105 transition-all`}>
+                  <CheckCircle2 className="h-4 w-4 text-white" />
                 </div>
-                <span className="text-lg font-bold">{feature}</span>
+                <span className="text-sm font-semibold text-gray-300">{item.feature}</span>
               </div>
             ))}
           </div>
 
-          <div className="flex items-center gap-2 text-primary-foreground/60 text-sm font-bold tracking-widest uppercase">
-            <ShieldCheck className="h-4 w-4" />
-            Trusted by 500+ users across Bangladesh
+          <div className="flex items-center gap-2 text-gray-500 text-xs font-bold tracking-widest uppercase">
+            <ShieldCheck className="h-3 w-3 text-indigo-400" />
+            Trusted by 500+ users
           </div>
         </div>
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-8 relative z-10 overflow-y-auto">
-        <div className="w-full max-w-xl py-12">
-          <div className="lg:hidden flex items-center justify-center gap-3 mb-12">
-            <div className="h-12 w-12 rounded-2xl bg-primary flex items-center justify-center shadow-xl">
-              <Car className="h-7 w-7 text-white" />
+      <div className="flex-1 flex items-center justify-center p-4 lg:p-6 relative z-10">
+        {/* Form background orbs */}
+        <div className="absolute top-10 right-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-[60px]" />
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-[60px]" />
+
+        <div className="w-full max-w-lg">
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-6">
+            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <Car className="h-5 w-5 text-white" />
             </div>
-            <span className="text-3xl font-black tracking-tighter">
-              Park<span className="text-primary">BD</span>
+            <span className="text-2xl font-black tracking-tighter text-white">
+              Park<span className="animated-gradient-text">BD</span>
             </span>
           </div>
 
           {/* Progress Steps */}
-          <div className="flex items-center justify-between mb-16 px-4">
+          <div className="flex items-center justify-between mb-8 px-2">
             {steps.map((step, index) => (
               <div key={step.id} className="flex flex-col items-center relative group">
                 <div
                   className={cn(
-                    "flex items-center justify-center h-14 w-14 rounded-2xl transition-all duration-500 z-10 shadow-lg",
+                    "flex items-center justify-center h-10 w-10 rounded-xl transition-all duration-300 z-10",
                     currentStep >= step.id
-                      ? "bg-primary text-white scale-110"
-                      : "bg-muted text-muted-foreground"
+                      ? "bg-gradient-to-br from-indigo-500 to-purple-600 text-white"
+                      : "bg-slate-700 text-gray-400"
                   )}
                 >
-                  <step.icon className="h-6 w-6" />
+                  <step.icon className="h-4 w-4" />
                 </div>
-                <div className="mt-4 text-center">
+                <div className="mt-2 text-center">
                   <p className={cn(
-                    "text-xs font-black uppercase tracking-widest mb-1",
-                    currentStep >= step.id ? "text-primary" : "text-muted-foreground"
+                    "text-[10px] font-bold uppercase tracking-wider",
+                    currentStep >= step.id ? "text-indigo-400" : "text-gray-500"
                   )}>
                     {step.title}
                   </p>
-                  <p className="text-[10px] font-bold text-muted-foreground/60 hidden sm:block">{step.description}</p>
                 </div>
                 {index < steps.length - 1 && (
                   <div
                     className={cn(
-                      "hidden sm:block absolute top-7 left-[calc(100%+0.5rem)] w-[calc(200%-4rem)] h-1 rounded-full",
-                      currentStep > step.id ? "bg-primary" : "bg-muted"
+                      "hidden sm:block absolute top-5 left-[calc(100%+0.25rem)] w-[calc(200%-3rem)] h-0.5 rounded-full",
+                      currentStep > step.id ? "bg-gradient-to-r from-indigo-500 to-purple-600" : "bg-slate-600"
                     )}
                   />
                 )}
@@ -248,249 +255,252 @@ export default function RegisterPage() {
           </div>
 
           <Card className="border-none shadow-none bg-transparent">
-            <CardHeader className="text-center pb-8 space-y-2">
-              <CardTitle className="text-4xl font-black tracking-tight">
-                {currentStep === 1 && "Start Your Profile"}
-                {currentStep === 2 && "Secure Your Account"}
-                {currentStep === 3 && "Almost There!"}
-              </CardTitle>
-              <p className="text-muted-foreground font-medium">
-                Please fill in the details below to proceed
-              </p>
-            </CardHeader>
-            <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-8">
-                {currentStep === 1 && (
-                  <div className="space-y-6 animate-in slide-in-from-right duration-500">
-                    <div className="grid grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-xs font-black uppercase tracking-widest ml-1">First Name</label>
-                        <Input
-                          placeholder="John"
-                          icon={<User className="h-4 w-4 text-primary" />}
-                          className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                          value={formData.firstName}
-                          onChange={(e) =>
-                            setFormData({ ...formData, firstName: e.target.value })
-                          }
-                          required
-                        />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-xs font-black uppercase tracking-widest ml-1">Last Name</label>
-                        <Input
-                          placeholder="Doe"
-                          className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                          value={formData.lastName}
-                          onChange={(e) =>
-                            setFormData({ ...formData, lastName: e.target.value })
-                          }
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">Email Address</label>
-                      <Input
-                        type="email"
-                        placeholder="john@example.com"
-                        icon={<Mail className="h-4 w-4 text-primary" />}
-                        className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                        value={formData.email}
-                        onChange={(e) =>
-                          setFormData({ ...formData, email: e.target.value })
-                        }
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">Phone Number</label>
-                      <Input
-                        type="tel"
-                        placeholder="01XXXXXXXXX"
-                        icon={<Phone className="h-4 w-4 text-primary" />}
-                        className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                        value={formData.phone}
-                        onChange={(e) =>
-                          setFormData({ ...formData, phone: e.target.value })
-                        }
-                        required
-                      />
-                    </div>
-                  </div>
-                )}
-
-                {currentStep === 2 && (
-                  <div className="space-y-6 animate-in slide-in-from-right duration-500">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">Choose Username</label>
-                      <Input
-                        placeholder="johndoe_123"
-                        icon={<User className="h-4 w-4 text-primary" />}
-                        className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                        value={formData.username}
-                        onChange={(e) =>
-                          setFormData({ ...formData, username: e.target.value })
-                        }
-                        required
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">Password</label>
-                      <div className="relative">
-                        <Input
-                          type={showPassword ? "text" : "password"}
-                          placeholder="••••••••"
-                          icon={<Lock className="h-4 w-4 text-primary" />}
-                          className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                          value={formData.password}
-                          onChange={(e) =>
-                            setFormData({ ...formData, password: e.target.value })
-                          }
-                          required
-                        />
-                        <button
-                          type="button"
-                          onClick={() => setShowPassword(!showPassword)}
-                          className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          {showPassword ? (
-                            <EyeOff className="h-5 w-5" />
-                          ) : (
-                            <Eye className="h-5 w-5" />
-                          )}
-                        </button>
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">Confirm Password</label>
-                      <Input
-                        type="password"
-                        placeholder="••••••••"
-                        icon={<Lock className="h-4 w-4 text-primary" />}
-                        className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                        value={formData.confirmPassword}
-                        onChange={(e) =>
-                          setFormData({ ...formData, confirmPassword: e.target.value })
-                        }
-                        required
-                      />
-                    </div>
-                    
-                    <div className="space-y-3">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">Who are you?</label>
-                      <div className="grid grid-cols-2 gap-4">
-                        {[
-                          { id: 'driver', label: 'Driver', icon: SteeringWheel, desc: 'I want to park' },
-                          { id: 'owner', label: 'Zone Owner', icon: Building2, desc: 'I have slots' }
-                        ].map((type) => (
-                          <button
-                            key={type.id}
-                            type="button"
-                            onClick={() => setFormData({ ...formData, userType: type.id as any })}
-                            className={cn(
-                              "flex flex-col items-center gap-3 p-6 rounded-[2rem] border-2 transition-all duration-300",
-                              formData.userType === type.id
-                                ? "border-primary bg-primary/5 shadow-xl shadow-primary/10"
-                                : "border-muted-foreground/10 bg-white hover:border-primary/30"
-                            )}
-                          >
-                            <div className={cn(
-                              "h-12 w-12 rounded-xl flex items-center justify-center transition-transform",
-                              formData.userType === type.id ? "bg-primary text-white rotate-6" : "bg-muted text-muted-foreground"
-                            )}>
-                              <type.icon className="h-6 w-6" />
-                            </div>
-                            <div className="text-center">
-                              <p className="text-sm font-black uppercase tracking-wider">{type.label}</p>
-                              <p className="text-[10px] font-bold text-muted-foreground/60">{type.desc}</p>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {currentStep === 3 && (
-                  <div className="space-y-6 animate-in slide-in-from-right duration-500">
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">Physical Address</label>
-                      <Input
-                        placeholder="House #, Road #, Area, City"
-                        icon={<MapPin className="h-4 w-4 text-primary" />}
-                        className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                        value={formData.address}
-                        onChange={(e) =>
-                          setFormData({ ...formData, address: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest ml-1">NID Number</label>
-                      <Input
-                        placeholder="Enter 10 or 13 digit NID"
-                        icon={<FileText className="h-4 w-4 text-primary" />}
-                        className="h-14 rounded-2xl bg-white border-muted-foreground/10"
-                        value={formData.nidNumber}
-                        onChange={(e) =>
-                          setFormData({ ...formData, nidNumber: e.target.value })
-                        }
-                      />
-                    </div>
-                    <div className="p-6 glass-card rounded-[2rem] border border-primary/10 flex items-start gap-4">
-                      <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
-                        <CheckCircle2 className="h-5 w-5" />
-                      </div>
-                      <p className="text-xs font-bold text-muted-foreground leading-relaxed">
-                        By clicking "Create Account", you agree to our <span className="text-primary cursor-pointer hover:underline">Terms of Service</span> and <span className="text-primary cursor-pointer hover:underline">Privacy Policy</span>. We will verify your NID for security.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex gap-4 pt-4">
-                  {currentStep > 1 && (
-                    <Button 
-                      type="button" 
-                      variant="outline" 
-                      onClick={handleBack} 
-                      className="h-16 flex-1 rounded-2xl font-black text-lg border-muted-foreground/20"
-                    >
-                      <ChevronLeft className="mr-2 h-5 w-5" />
-                      Back
-                    </Button>
-                  )}
-                  {currentStep < 3 ? (
-                    <Button 
-                      type="button" 
-                      onClick={handleNext} 
-                      className="h-16 flex-1 rounded-2xl font-black text-lg shadow-xl shadow-primary/20"
-                    >
-                      Continue
-                      <ChevronRight className="ml-2 h-5 w-5" />
-                    </Button>
-                  ) : (
-                    <Button 
-                      type="submit" 
-                      className="h-16 flex-1 rounded-2xl font-black text-lg shadow-xl shadow-primary/20" 
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Creating..." : "Create Account"}
-                    </Button>
-                  )}
-                </div>
-              </form>
-
-              <div className="mt-12 text-center">
-                <p className="text-muted-foreground font-medium">
-                  Already have an account?{" "}
-                  <Link href="/login" className="text-primary hover:underline font-black">
-                    Sign In Here
-                  </Link>
+            <div className="relative rounded-2xl p-5 bg-gradient-to-br from-slate-800/60 via-slate-900/80 to-slate-800/60 border border-slate-600/30 shadow-xl shadow-indigo-500/10 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5" />
+              <CardHeader className="text-center pb-4 border-b border-slate-700/50 relative z-10">
+                <CardTitle className="text-2xl font-black tracking-tight text-white">
+                  {currentStep === 1 && "Start Your Profile"}
+                  {currentStep === 2 && "Secure Your Account"}
+                  {currentStep === 3 && "Almost There!"}
+                </CardTitle>
+                <p className="text-xs text-gray-400">
+                  Please fill in the details below to proceed
                 </p>
-              </div>
-            </CardContent>
+              </CardHeader>
+              <CardContent className="relative z-10">
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  {currentStep === 1 && (
+                    <div className="space-y-4 animate-in slide-in-from-right duration-500">
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">First Name</label>
+                          <Input
+                            placeholder="John"
+                            icon={<User className="h-3.5 w-3.5 text-indigo-400" />}
+                            className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                            value={formData.firstName}
+                            onChange={(e) =>
+                              setFormData({ ...formData, firstName: e.target.value })
+                            }
+                            required
+                          />
+                        </div>
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Last Name</label>
+                          <Input
+                            placeholder="Doe"
+                            className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                            value={formData.lastName}
+                            onChange={(e) =>
+                              setFormData({ ...formData, lastName: e.target.value })
+                            }
+                            required
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Email Address</label>
+                        <Input
+                          type="email"
+                          placeholder="john@example.com"
+                          icon={<Mail className="h-3.5 w-3.5 text-indigo-400" />}
+                          className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                          value={formData.email}
+                          onChange={(e) =>
+                            setFormData({ ...formData, email: e.target.value })
+                          }
+                          required
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Phone Number</label>
+                        <Input
+                          type="tel"
+                          placeholder="01XXXXXXXXX"
+                          icon={<Phone className="h-3.5 w-3.5 text-indigo-400" />}
+                          className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                          value={formData.phone}
+                          onChange={(e) =>
+                            setFormData({ ...formData, phone: e.target.value })
+                          }
+                          required
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {currentStep === 2 && (
+                    <div className="space-y-4 animate-in slide-in-from-right duration-500">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Choose Username</label>
+                        <Input
+                          placeholder="johndoe_123"
+                          icon={<User className="h-3.5 w-3.5 text-indigo-400" />}
+                          className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                          value={formData.username}
+                          onChange={(e) =>
+                            setFormData({ ...formData, username: e.target.value })
+                          }
+                          required
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Password</label>
+                        <div className="relative">
+                          <Input
+                            type={showPassword ? "text" : "password"}
+                            placeholder="••••••••"
+                            icon={<Lock className="h-3.5 w-3.5 text-indigo-400" />}
+                            className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                            value={formData.password}
+                            onChange={(e) =>
+                              setFormData({ ...formData, password: e.target.value })
+                            }
+                            required
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-400 transition-colors"
+                          >
+                            {showPassword ? (
+                              <EyeOff className="h-4 w-4" />
+                            ) : (
+                              <Eye className="h-4 w-4" />
+                            )}
+                          </button>
+                        </div>
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Confirm Password</label>
+                        <Input
+                          type="password"
+                          placeholder="••••••••"
+                          icon={<Lock className="h-3.5 w-3.5 text-indigo-400" />}
+                          className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                          value={formData.confirmPassword}
+                          onChange={(e) =>
+                            setFormData({ ...formData, confirmPassword: e.target.value })
+                          }
+                          required
+                        />
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Who are you?</label>
+                        <div className="grid grid-cols-2 gap-3">
+                          {[
+                            { id: 'driver', label: 'Driver', icon: SteeringWheel, desc: 'I want to park', gradient: 'from-blue-500 to-cyan-500' },
+                            { id: 'owner', label: 'Zone Owner', icon: Building2, desc: 'I have slots', gradient: 'from-purple-500 to-pink-500' }
+                          ].map((type) => (
+                            <button
+                              key={type.id}
+                              type="button"
+                              onClick={() => setFormData({ ...formData, userType: type.id as any })}
+                              className={cn(
+                                "flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-all duration-300",
+                                formData.userType === type.id
+                                  ? "border-indigo-500 bg-indigo-500/10 shadow-lg shadow-indigo-500/20"
+                                  : "border-slate-600 bg-slate-800/50 hover:border-indigo-500/50"
+                              )}
+                            >
+                              <div className={cn(
+                                "h-9 w-9 rounded-lg flex items-center justify-center transition-transform",
+                                formData.userType === type.id ? `bg-gradient-to-br ${type.gradient} text-white rotate-3` : "bg-slate-700 text-gray-400"
+                              )}>
+                                <type.icon className="h-4 w-4" />
+                              </div>
+                              <div className="text-center">
+                                <p className="text-xs font-bold uppercase tracking-wider text-white">{type.label}</p>
+                                <p className="text-[9px] font-medium text-gray-500">{type.desc}</p>
+                              </div>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {currentStep === 3 && (
+                    <div className="space-y-4 animate-in slide-in-from-right duration-500">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Physical Address</label>
+                        <Input
+                          placeholder="House #, Road #, Area, City"
+                          icon={<MapPin className="h-3.5 w-3.5 text-indigo-400" />}
+                          className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                          value={formData.address}
+                          onChange={(e) =>
+                            setFormData({ ...formData, address: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">NID Number</label>
+                        <Input
+                          placeholder="Enter 10 or 13 digit NID"
+                          icon={<FileText className="h-3.5 w-3.5 text-indigo-400" />}
+                          className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                          value={formData.nidNumber}
+                          onChange={(e) =>
+                            setFormData({ ...formData, nidNumber: e.target.value })
+                          }
+                        />
+                      </div>
+                      <div className="p-3 bg-slate-800/30 rounded-xl border border-indigo-500/20 flex items-start gap-3">
+                        <div className="h-7 w-7 rounded-full bg-indigo-500/20 flex items-center justify-center text-indigo-400 shrink-0">
+                          <CheckCircle2 className="h-3.5 w-3.5" />
+                        </div>
+                        <p className="text-[10px] font-medium text-gray-400 leading-tight">
+                          By clicking "Create Account", you agree to our <span className="text-indigo-400 cursor-pointer hover:underline">Terms of Service</span> and <span className="text-indigo-400 cursor-pointer hover:underline">Privacy Policy</span>.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex gap-3 pt-3">
+                    {currentStep > 1 && (
+                      <Button
+                        type="button"
+                        variant="outline"
+                        onClick={handleBack}
+                        className="h-11 flex-1 rounded-xl font-bold text-sm border-slate-600 text-gray-300 hover:bg-slate-800 hover:border-indigo-500"
+                      >
+                        <ChevronLeft className="mr-1.5 h-4 w-4" />
+                        Back
+                      </Button>
+                    )}
+                    {currentStep < 3 ? (
+                      <Button
+                        type="button"
+                        onClick={handleNext}
+                        className="h-11 flex-1 rounded-xl font-bold text-sm shadow-lg shadow-indigo-500/20 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700"
+                      >
+                        Continue
+                        <ChevronRight className="ml-1.5 h-4 w-4" />
+                      </Button>
+                    ) : (
+                      <Button
+                        type="submit"
+                        className="h-11 flex-1 rounded-xl font-bold text-sm shadow-lg shadow-indigo-500/20 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700"
+                        disabled={isLoading}
+                      >
+                        {isLoading ? "Creating..." : "Create Account"}
+                      </Button>
+                    )}
+                  </div>
+                </form>
+
+                <div className="mt-4 text-center">
+                  <p className="text-gray-500 text-xs font-medium">
+                    Already have an account?{" "}
+                    <Link href="/login" className="text-indigo-400 hover:underline font-bold">
+                      Sign In Here
+                    </Link>
+                  </p>
+                </div>
+              </CardContent>
+            </div>
           </Card>
         </div>
       </div>

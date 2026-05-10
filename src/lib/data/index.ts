@@ -302,6 +302,21 @@ export const mockBookings = [
     created_at: "2024-05-10T00:00:00Z",
     updated_at: "2024-05-10T00:00:00Z",
   },
+  {
+    id: "booking-005",
+    booking_code: "PK-Q7R8S9T0",
+    user_id: "user-002",
+    slot_id: "slot-003",
+    vehicle_id: "veh-003",
+    start_date: "2024-06-01",
+    end_date: "2024-09-01",
+    duration_months: 3,
+    total_amount: 9000,
+    monthly_amount: 3000,
+    status: "pending" as const,
+    created_at: "2024-05-15T00:00:00Z",
+    updated_at: "2024-05-15T00:00:00Z",
+  },
 ];
 
 export const mockPayments = [

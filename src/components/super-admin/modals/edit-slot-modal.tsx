@@ -14,9 +14,10 @@ interface Slot {
   slot_number: string;
   unique_slot_id: string;
   zone_id: string;
-  slot_type: "car" | "bike" | "truck";
-  status: "available" | "booked" | "maintenance";
+  slot_type: "car" | "bike" | "truck" | "bus";
+  status: "available" | "pending" | "booked" | "occupied" | "cancelled" | "maintenance";
   price_per_month: number;
+  description?: string;
 }
 
 interface EditSlotModalProps {
@@ -30,8 +31,8 @@ export function EditSlotModal({ isOpen, onClose, slot }: EditSlotModalProps) {
     slot_number: "",
     unique_slot_id: "",
     zone_id: "",
-    slot_type: "car" as "car" | "bike" | "truck",
-    status: "available" as "available" | "booked" | "maintenance",
+    slot_type: "car" as "car" | "bike" | "truck" | "bus",
+    status: "available" as "available" | "pending" | "booked" | "occupied" | "cancelled" | "maintenance",
     price_per_month: 0,
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -93,17 +94,21 @@ export function EditSlotModal({ isOpen, onClose, slot }: EditSlotModalProps) {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Slot Type</label>
-                  <Select value={formData.slot_type} onChange={(e) => setFormData({ ...formData, slot_type: e.target.value as "car" | "bike" | "truck" })} className="h-12 rounded-xl border-slate-200">
+                  <Select value={formData.slot_type} onChange={(e) => setFormData({ ...formData, slot_type: e.target.value as "car" | "bike" | "truck" | "bus" })} className="h-12 rounded-xl border-slate-200">
                     <option value="car">Car</option>
                     <option value="bike">Bike</option>
                     <option value="truck">Truck</option>
+                    <option value="bus">Bus</option>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-1">Status</label>
-                  <Select value={formData.status} onChange={(e) => setFormData({ ...formData, status: e.target.value as "available" | "booked" | "maintenance" })} className="h-12 rounded-xl border-slate-200">
+                  <Select value={formData.status} onChange={(e) => setFormData({ ...formData, status: e.target.value as "available" | "pending" | "booked" | "occupied" | "cancelled" | "maintenance" })} className="h-12 rounded-xl border-slate-200">
                     <option value="available">Available</option>
+                    <option value="pending">Pending</option>
                     <option value="booked">Booked</option>
+                    <option value="occupied">Occupied</option>
+                    <option value="cancelled">Cancelled</option>
                     <option value="maintenance">Maintenance</option>
                   </Select>
                 </div>
