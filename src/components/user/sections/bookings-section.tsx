@@ -22,34 +22,34 @@ export function BookingsSection() {
   }, [isDemoMode, filter]);
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+    <div className="space-y-5 animate-in fade-in slide-in-from-bottom-4 duration-700">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-black tracking-tight text-gradient">My Bookings</h1>
-          <p className="text-muted-foreground font-medium">Keep track of your active and past parking reservations.</p>
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-black tracking-tight text-white">My <span className="animated-gradient-text">Bookings</span></h1>
+          <p className="text-gray-400 text-sm font-medium">Keep track of your active and past parking reservations.</p>
         </div>
-        <div className="flex items-center gap-2 p-1 bg-slate-100 rounded-xl border border-slate-200">
-           <Button 
-             variant={filter === "all" ? "secondary" : "ghost"} 
-             size="sm" 
+        <div className="flex items-center gap-1 p-1 bg-slate-800/50 rounded-lg border border-slate-700">
+           <Button
+             variant={filter === "all" ? "secondary" : "ghost"}
+             size="sm"
              onClick={() => setFilter("all")}
-             className={`rounded-lg text-xs font-bold px-4 ${filter === "all" ? 'shadow-sm' : 'text-slate-500'}`}
+             className={`rounded-md text-[10px] font-bold px-3 ${filter === "all" ? 'bg-indigo-500 text-white' : 'text-gray-400 hover:text-white'}`}
            >
              All
            </Button>
-           <Button 
-             variant={filter === "active" ? "secondary" : "ghost"} 
-             size="sm" 
+           <Button
+             variant={filter === "active" ? "secondary" : "ghost"}
+             size="sm"
              onClick={() => setFilter("active")}
-             className={`rounded-lg text-xs font-bold px-4 ${filter === "active" ? 'shadow-sm' : 'text-slate-500'}`}
+             className={`rounded-md text-[10px] font-bold px-3 ${filter === "active" ? 'bg-indigo-500 text-white' : 'text-gray-400 hover:text-white'}`}
            >
              Active
            </Button>
-           <Button 
-             variant={filter === "pending" ? "secondary" : "ghost"} 
-             size="sm" 
+           <Button
+             variant={filter === "pending" ? "secondary" : "ghost"}
+             size="sm"
              onClick={() => setFilter("pending")}
-             className={`rounded-lg text-xs font-bold px-4 ${filter === "pending" ? 'shadow-sm' : 'text-slate-500'}`}
+             className={`rounded-md text-[10px] font-bold px-3 ${filter === "pending" ? 'bg-indigo-500 text-white' : 'text-gray-400 hover:text-white'}`}
            >
              Pending
            </Button>
@@ -60,53 +60,53 @@ export function BookingsSection() {
         {filteredBookings.length > 0 ? (
           filteredBookings.map((booking) => {
             const vehicle = mockVehicles.find(v => v.id === booking.vehicle_id);
-            
+
             return (
-              <Card key={booking.id} className="premium-card border-none rounded-4xl overflow-hidden group">
+              <Card key={booking.id} className="border-none rounded-2xl overflow-hidden group bg-slate-800/50 border border-slate-700/50 hover:border-slate-600/50 transition-all">
                 <CardContent className="p-0">
                 <div className="flex flex-col lg:flex-row">
-                  <div className={`lg:w-72 p-8 flex flex-col justify-between ${
-                    booking.status === 'approved' ? 'bg-emerald-50' : 
-                    booking.status === 'pending' ? 'bg-amber-50' : 'bg-slate-50'
+                  <div className={`lg:w-56 p-5 flex flex-col justify-between ${
+                    booking.status === 'approved' ? 'bg-emerald-500/10' :
+                    booking.status === 'pending' ? 'bg-amber-500/10' : 'bg-slate-700/50'
                   }`}>
                     <div>
                       <Badge className={`${
-                        booking.status === 'approved' ? 'bg-emerald-500' : 
+                        booking.status === 'approved' ? 'bg-emerald-500' :
                         booking.status === 'pending' ? 'bg-amber-500' : 'bg-slate-500'
-                      } text-white border-none px-4 py-1 font-black text-[10px] uppercase tracking-widest rounded-full mb-4`}>
+                      } text-white border-none px-3 py-1 font-bold text-[9px] uppercase tracking-wider rounded-full mb-3`}>
                         {booking.status}
                       </Badge>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">Booking Code</p>
-                      <p className="text-xl font-black tracking-tighter text-slate-900">{booking.booking_code}</p>
+                      <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Booking Code</p>
+                      <p className="text-lg font-black tracking-tight text-white">{booking.booking_code}</p>
                     </div>
-                    <div className="mt-8">
-                       <div className="flex items-center gap-2 text-slate-500">
-                         {booking.status === 'approved' ? <CheckCircle2 className="h-5 w-5 text-emerald-500" /> : 
-                          booking.status === 'pending' ? <Clock className="h-5 w-5 text-amber-500" /> : 
-                          <CheckCircle2 className="h-5 w-5 text-slate-400" />}
-                         <span className="text-sm font-bold">
-                           {booking.status === 'approved' ? 'Active Session' : 
+                    <div className="mt-4">
+                       <div className="flex items-center gap-2 text-gray-400">
+                         {booking.status === 'approved' ? <CheckCircle2 className="h-4 w-4 text-emerald-400" /> :
+                          booking.status === 'pending' ? <Clock className="h-4 w-4 text-amber-400" /> :
+                          <CheckCircle2 className="h-4 w-4 text-gray-500" />}
+                         <span className="text-xs font-medium">
+                           {booking.status === 'approved' ? 'Active Session' :
                             booking.status === 'pending' ? 'Waiting Review' : 'Booking Completed'}
                          </span>
                        </div>
                     </div>
                   </div>
 
-                  <div className="flex-1 p-8 grid md:grid-cols-3 gap-8 items-center">
-                    <div className="space-y-4">
-                      <div className="flex items-center gap-4">
-                        <div className="h-12 w-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-500">
-                          <Car className="h-6 w-6" />
+                  <div className="flex-1 p-4 grid md:grid-cols-3 gap-4 items-center">
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3">
+                        <div className="h-10 w-10 rounded-xl bg-slate-700/50 flex items-center justify-center text-gray-400">
+                          <Car className="h-5 w-5" />
                         </div>
                         <div>
-                          <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Vehicle</p>
-                          <p className="font-bold text-slate-900">{vehicle?.vehicle_number}</p>
-                          <p className="text-xs text-muted-foreground font-medium">{vehicle?.brand} {vehicle?.model}</p>
+                          <p className="text-[9px] font-bold text-gray-500 uppercase tracking-wider">Vehicle</p>
+                          <p className="font-bold text-sm text-white">{vehicle?.vehicle_number}</p>
+                          <p className="text-[10px] text-gray-400 font-medium">{vehicle?.brand} {vehicle?.model}</p>
                         </div>
                       </div>
                     </div>
 
-                    <div className="space-y-4">
+                    <div className="space-y-3">
                       <div className="flex items-center gap-4">
                         <div className="h-12 w-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-500">
                           <Calendar className="h-6 w-6" />

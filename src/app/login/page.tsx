@@ -10,8 +10,9 @@ import { useUserStore } from "@/lib/store";
 import { Button } from "@/components/shared/button";
 import { Input } from "@/components/shared/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/shared/card";
-import { Car, Eye, EyeOff, Mail, Lock, Users, Zap, ShieldCheck } from "lucide-react";
+import { Car, Eye, EyeOff, Mail, Lock, Users, Zap, ShieldCheck, CheckCircle2 } from "lucide-react";
 import toast from "react-hot-toast";
+import { cn } from "@/lib/utils";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -93,169 +94,197 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden bg-background">
+    <div className="min-h-screen flex relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+      {/* Background orbs */}
+      <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-500/20 rounded-full blur-[120px]" />
+      <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-[120px]" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-pink-500/10 rounded-full blur-[150px]" />
+
       {/* Mouse Glow Effect */}
-      <div 
+      <div
         className="mouse-glow hidden lg:block"
-        style={{ 
-          left: mousePosition.x, 
-          top: mousePosition.y 
+        style={{
+          left: mousePosition.x,
+          top: mousePosition.y
         }}
       />
 
       {/* Left Panel - Branding */}
-      <div className="hidden lg:flex lg:w-1/2 bg-primary relative overflow-hidden">
-        <div className="absolute inset-0 bg-mesh opacity-40" />
-        <div className="absolute inset-0 bg-dots opacity-20" />
-        <div className="relative z-10 flex flex-col justify-center items-center w-full p-20 text-white space-y-12">
+      <div className="hidden lg:flex lg:w-[45%] bg-gradient-to-b from-slate-800/80 to-slate-900/80 relative overflow-hidden border-r border-slate-700">
+        <div className="absolute inset-0 bg-grid opacity-10" />
+        <div className="relative z-10 flex flex-col justify-center items-center w-full p-8 text-white space-y-6">
           <div className="animate-float">
-            <div className="h-24 w-24 rounded-[2rem] bg-white/20 backdrop-blur-xl border border-white/30 flex items-center justify-center shadow-2xl">
-              <Car className="h-12 w-12 text-white" />
+            <div className="h-16 w-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-xl shadow-indigo-500/30">
+              <Car className="h-8 w-8 text-white" />
             </div>
           </div>
-          <div className="text-center space-y-6">
-            <h1 className="text-6xl font-black tracking-tighter">
-              Park<span className="text-accent">BD</span>
+          <div className="text-center space-y-2">
+            <h1 className="text-4xl font-black tracking-tighter">
+              Welcome to Park<span className="animated-gradient-text">BD</span>
             </h1>
-            <p className="text-xl text-primary-foreground/90 max-w-md leading-relaxed font-medium">
+            <p className="text-sm text-gray-400 max-w-sm font-medium">
               Join thousands of users managing parking slots across Bangladesh with our state-of-the-art platform.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 w-full max-w-lg">
-            <div className="p-8 rounded-[2rem] bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-colors">
-              <p className="text-4xl font-black mb-2">1000+</p>
-              <p className="text-sm font-bold uppercase tracking-widest text-primary-foreground/70">Parking Slots</p>
+
+          <div className="grid grid-cols-2 gap-4 w-full max-w-xs">
+            <div className="p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-colors">
+              <p className="text-2xl font-black mb-1">1000+</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Parking Slots</p>
             </div>
-            <div className="p-8 rounded-[2rem] bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/15 transition-colors">
-              <p className="text-4xl font-black mb-2">50+</p>
-              <p className="text-sm font-bold uppercase tracking-widest text-primary-foreground/70">Active Zones</p>
+            <div className="p-4 rounded-xl bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 transition-colors">
+              <p className="text-2xl font-black mb-1">50+</p>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Active Zones</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 text-primary-foreground/60 text-sm font-bold tracking-widest">
-            <ShieldCheck className="h-4 w-4" />
-            SECURED BY ENTERPRISE GRADE ENCRYPTION
+
+          <div className="space-y-2 w-full max-w-xs">
+            {[
+              { feature: "Real-time slot tracking", color: "from-blue-500 to-cyan-500" },
+              { feature: "Secure digital payments", color: "from-emerald-500 to-teal-500" },
+              { feature: "24/7 Premium support", color: "from-purple-500 to-pink-500" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2 group">
+                <div className={`h-6 w-6 rounded-lg bg-gradient-to-br ${item.color} flex items-center justify-center group-hover:scale-105 transition-all`}>
+                  <CheckCircle2 className="h-3 w-3 text-white" />
+                </div>
+                <span className="text-xs font-semibold text-gray-400">{item.feature}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2 text-gray-500 text-xs font-bold tracking-widest uppercase">
+            <ShieldCheck className="h-3 w-3 text-indigo-400" />
+            Secured by enterprise encryption
           </div>
         </div>
       </div>
 
       {/* Right Panel - Form */}
-      <div className="flex-1 flex items-center justify-center p-8 relative z-10">
-        <div className="w-full max-w-md">
-          <div className="lg:hidden flex items-center justify-center gap-3 mb-12">
-            <div className="h-12 w-12 rounded-2xl bg-primary flex items-center justify-center shadow-xl">
-              <Car className="h-7 w-7 text-white" />
+      <div className="flex-1 flex items-center justify-center p-4 lg:p-6 relative z-10">
+        {/* Form background orbs */}
+        <div className="absolute top-10 right-10 w-32 h-32 bg-indigo-500/10 rounded-full blur-[60px]" />
+        <div className="absolute bottom-10 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-[60px]" />
+
+        <div className="w-full max-w-lg">
+          <div className="lg:hidden flex items-center justify-center gap-2 mb-6">
+            <div className="h-10 w-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg">
+              <Car className="h-5 w-5 text-white" />
             </div>
-            <span className="text-3xl font-black tracking-tighter">
-              Park<span className="text-primary">BD</span>
+            <span className="text-2xl font-black tracking-tighter text-white">
+              Park<span className="animated-gradient-text">BD</span>
             </span>
           </div>
 
           <Card className="border-none shadow-none bg-transparent">
-            <CardHeader className="text-center pb-8 space-y-2">
-              <CardTitle className="text-4xl font-black tracking-tight">Welcome Back</CardTitle>
-              <p className="text-muted-foreground font-medium">
-                Enter your credentials to access your dashboard
-              </p>
-            </CardHeader>
-            <CardContent className="space-y-8">
-              {/* Demo Login Buttons */}
-              <div className="p-6 glass-card rounded-[2rem] border border-primary/10">
-                <p className="text-xs font-black mb-4 text-center uppercase tracking-[0.2em] text-primary">Quick Access</p>
-                <div className="grid grid-cols-3 gap-3">
-                  {[
-                    { role: "super_admin", label: "Super", color: "bg-primary" },
-                    { role: "sub_admin", label: "Admin", color: "bg-blue-600" },
-                    { role: "user", label: "User", color: "bg-emerald-600" }
-                  ].map((btn) => (
-                    <button
-                      key={btn.role}
-                      onClick={() => handleDemoLogin(btn.role as any)}
-                      className="flex flex-col items-center gap-2 group p-2 rounded-2xl hover:bg-white transition-colors"
-                    >
-                      <div className={`h-12 w-12 rounded-xl ${btn.color} text-white flex items-center justify-center shadow-lg transition-transform group-hover:scale-110 group-hover:rotate-6`}>
-                        <Users className="h-6 w-6" />
-                      </div>
-                      <span className="text-[10px] font-black uppercase tracking-wider">{btn.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-muted-foreground/10"></div>
-                </div>
-                <div className="relative flex justify-center text-xs uppercase tracking-widest font-black text-muted-foreground">
-                  <span className="bg-background px-4">OR SECURE LOGIN</span>
-                </div>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <label className="text-xs font-black uppercase tracking-widest ml-1">Email Address</label>
-                  <Input
-                    type="email"
-                    placeholder="name@example.com"
-                    icon={<Mail className="h-4 w-4 text-primary" />}
-                    className="h-14 rounded-2xl border-muted-foreground/10 focus:border-primary/50 transition-all bg-white"
-                    value={formData.email}
-                    onChange={(e) =>
-                      setFormData({ ...formData, email: e.target.value })
-                    }
-                    required
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center ml-1">
-                    <label className="text-xs font-black uppercase tracking-widest">Password</label>
-                    <Link
-                      href="/forgot-password"
-                      className="text-xs font-bold text-primary hover:underline"
-                    >
-                      Forgot?
-                    </Link>
+            <div className="relative rounded-2xl p-5 bg-gradient-to-br from-slate-800/60 via-slate-900/80 to-slate-800/60 border border-slate-600/30 shadow-xl shadow-indigo-500/10 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-transparent to-purple-500/5" />
+              <CardHeader className="text-center pb-4 border-b border-slate-700/50 relative z-10">
+                <CardTitle className="text-2xl font-black tracking-tight text-white">Welcome Back</CardTitle>
+                <p className="text-xs text-gray-400">
+                  Enter your credentials to access your dashboard
+                </p>
+              </CardHeader>
+              <CardContent className="relative z-10 space-y-4">
+                {/* Demo Login Buttons */}
+                <div className="p-3 rounded-xl bg-slate-800/30 border border-slate-600/30">
+                  <p className="text-[10px] font-bold mb-3 text-center uppercase tracking-wider text-gray-500">Quick Access</p>
+                  <div className="grid grid-cols-3 gap-2">
+                    {[
+                      { role: "super_admin", label: "Super", gradient: "from-indigo-500 to-purple-600" },
+                      { role: "sub_admin", label: "Admin", gradient: "from-blue-500 to-cyan-500" },
+                      { role: "user", label: "User", gradient: "from-emerald-500 to-teal-500" }
+                    ].map((btn) => (
+                      <button
+                        key={btn.role}
+                        onClick={() => handleDemoLogin(btn.role as any)}
+                        className="flex flex-col items-center gap-1.5 group p-2 rounded-xl hover:bg-white/5 transition-colors"
+                      >
+                        <div className={`h-8 w-8 rounded-lg bg-gradient-to-br ${btn.gradient} text-white flex items-center justify-center shadow-md transition-transform group-hover:scale-105 group-hover:rotate-3`}>
+                          <Users className="h-4 w-4" />
+                        </div>
+                        <span className="text-[9px] font-bold uppercase tracking-wider text-gray-400">{btn.label}</span>
+                      </button>
+                    ))}
                   </div>
-                  <div className="relative">
+                </div>
+
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-slate-700"></div>
+                  </div>
+                  <div className="relative flex justify-center text-[10px] uppercase tracking-wider font-bold text-gray-500">
+                    <span className="bg-slate-900/80 px-3">Or Secure Login</span>
+                  </div>
+                </div>
+
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-bold uppercase tracking-wider ml-1 text-gray-400">Email Address</label>
                     <Input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="••••••••"
-                      icon={<Lock className="h-4 w-4 text-primary" />}
-                      className="h-14 rounded-2xl border-muted-foreground/10 focus:border-primary/50 transition-all bg-white"
-                      value={formData.password}
+                      type="email"
+                      placeholder="name@example.com"
+                      icon={<Mail className="h-3.5 w-3.5 text-indigo-400" />}
+                      className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                      value={formData.email}
                       onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
+                        setFormData({ ...formData, email: e.target.value })
                       }
                       required
                     />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-primary transition-colors"
-                    >
-                      {showPassword ? (
-                        <EyeOff className="h-5 w-5" />
-                      ) : (
-                        <Eye className="h-5 w-5" />
-                      )}
-                    </button>
                   </div>
+
+                  <div className="space-y-1.5">
+                    <div className="flex justify-between items-center ml-1">
+                      <label className="text-[10px] font-bold uppercase tracking-wider text-gray-400">Password</label>
+                      <Link
+                        href="/forgot-password"
+                        className="text-[10px] font-bold text-indigo-400 hover:underline"
+                      >
+                        Forgot?
+                      </Link>
+                    </div>
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        icon={<Lock className="h-3.5 w-3.5 text-indigo-400" />}
+                        className="h-11 rounded-xl bg-slate-800/50 border-slate-600/50 text-white placeholder:text-gray-500 text-sm"
+                        value={formData.password}
+                        onChange={(e) =>
+                          setFormData({ ...formData, password: e.target.value })
+                        }
+                        required
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-indigo-400 transition-colors"
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+
+                  <Button type="submit" className="w-full h-11 rounded-xl text-sm font-bold shadow-lg shadow-indigo-500/20 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700" disabled={isLoading}>
+                    {isLoading ? "Signing in..." : "Access Dashboard"}
+                  </Button>
+                </form>
+
+                <div className="text-center pt-1">
+                  <p className="text-gray-500 text-xs font-medium">
+                    Don't have an account?{" "}
+                    <Link href="/register" className="text-indigo-400 hover:underline font-bold">
+                      Create One Now
+                    </Link>
+                  </p>
                 </div>
-
-                <Button type="submit" className="w-full h-16 rounded-2xl text-lg font-black shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform" disabled={isLoading}>
-                  {isLoading ? "Signing in..." : "Access Dashboard"}
-                </Button>
-              </form>
-
-              <div className="text-center pt-4">
-                <p className="text-muted-foreground font-medium">
-                  Don't have an account?{" "}
-                  <Link href="/register" className="text-primary hover:underline font-black">
-                    Create One Now
-                  </Link>
-                </p>
-              </div>
-            </CardContent>
+              </CardContent>
+            </div>
           </Card>
         </div>
       </div>

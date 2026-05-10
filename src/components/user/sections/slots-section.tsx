@@ -111,11 +111,11 @@ export function SlotsSection() {
   }, [divisions, districts, areas, activeFilters.division_id, activeFilters.district_id]);
 
   return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-        <div className="flex flex-col gap-2">
-          <h1 className="text-3xl font-black tracking-tight text-gradient">Browse Slots</h1>
-          <p className="text-muted-foreground font-medium">Find and book the perfect parking spot in your area.</p>
+    <div className="space-y-5 animate-in fade-in slide-in-from-bottom-4 duration-700">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+        <div className="flex flex-col gap-1.5">
+          <h1 className="text-2xl font-black tracking-tight text-white">Browse <span className="animated-gradient-text">Slots</span></h1>
+          <p className="text-gray-400 text-sm font-medium">Find and book the perfect parking spot in your area.</p>
         </div>
         
         <div className="w-full lg:w-auto">
@@ -129,61 +129,61 @@ export function SlotsSection() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredSlots.map((slot) => {
           const zone = zones.find(z => z.id === slot.zone_id);
           return (
-            <Card key={slot.id} className="premium-card group border-none rounded-4xl overflow-hidden flex flex-col">
-              <div className="relative h-48 bg-slate-100 overflow-hidden">
-                 <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent z-10" />
-                 <div className="absolute top-4 right-4 z-20">
+            <Card key={slot.id} className="group border-none rounded-2xl overflow-hidden flex flex-col bg-slate-800/50 border border-slate-700/50 hover:border-slate-600/50 transition-all">
+              <div className="relative h-36 bg-slate-700/50 overflow-hidden">
+                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10" />
+                 <div className="absolute top-3 right-3 z-20">
                     <Badge className={`${
-                      slot.status === 'available' ? 'bg-emerald-500' : 
+                      slot.status === 'available' ? 'bg-emerald-500' :
                       slot.status === 'booked' ? 'bg-amber-500' : 'bg-rose-500'
-                    } text-white border-none px-4 py-1.5 font-black text-[10px] uppercase tracking-widest rounded-full shadow-lg`}>
+                    } text-white border-none px-3 py-1 font-bold text-[9px] uppercase tracking-wider rounded-full shadow-lg`}>
                       {slot.status}
                     </Badge>
                  </div>
-                 <div className="absolute bottom-4 left-6 z-20">
-                    <p className="text-white/70 text-[10px] font-black uppercase tracking-widest mb-1">Price per month</p>
-                    <p className="text-2xl font-black text-white tracking-tight">{formatCurrency(slot.price_per_month)}</p>
+                 <div className="absolute bottom-3 left-4 z-20">
+                    <p className="text-white/60 text-[9px] font-bold uppercase tracking-wider mb-0.5">Price per month</p>
+                    <p className="text-xl font-black text-white tracking-tight">{formatCurrency(slot.price_per_month)}</p>
                  </div>
                  <div className="absolute inset-0 flex items-center justify-center opacity-10 group-hover:scale-110 transition-transform duration-700">
-                    {slot.slot_type === 'car' ? <Car size={120} /> : slot.slot_type === 'bike' ? <Bike size={120} /> : <Truck size={120} />}
+                    {slot.slot_type === 'car' ? <Car size={80} /> : slot.slot_type === 'bike' ? <Bike size={80} /> : <Truck size={80} />}
                  </div>
               </div>
 
-              <CardContent className="p-8 flex-1 flex flex-col">
-                <div className="flex-1 space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary">
-                       <MapPin className="h-5 w-5" />
+              <CardContent className="p-4 flex-1 flex flex-col">
+                <div className="flex-1 space-y-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="h-9 w-9 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-400">
+                       <MapPin className="h-4 w-4" />
                     </div>
                     <div>
-                      <h3 className="font-black text-lg text-slate-900 leading-none">{zone?.zone_name || 'Premium Zone'}</h3>
-                      <p className="text-xs text-muted-foreground font-medium mt-1">{zone?.address || 'Location information'}</p>
+                      <h3 className="font-bold text-sm text-white leading-none">{zone?.zone_name || 'Premium Zone'}</h3>
+                      <p className="text-[10px] text-gray-400 font-medium mt-0.5">{zone?.address || 'Location information'}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-100 mt-6">
-                    <div className="flex items-center gap-3">
-                      <div className="h-8 w-8 rounded-lg bg-white shadow-sm flex items-center justify-center text-slate-500">
-                        <Zap className="h-4 w-4" />
+                  <div className="flex items-center justify-between p-3 rounded-xl bg-slate-900/50 border border-slate-700/50 mt-4">
+                    <div className="flex items-center gap-2">
+                      <div className="h-7 w-7 rounded-md bg-slate-800 flex items-center justify-center text-gray-400">
+                        <Zap className="h-3.5 w-3.5" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Slot ID</p>
-                        <p className="font-bold text-sm text-slate-700">{slot.unique_slot_id}</p>
+                        <p className="text-[8px] font-bold text-gray-500 uppercase tracking-wider">Slot ID</p>
+                        <p className="font-bold text-xs text-gray-300">{slot.unique_slot_id}</p>
                       </div>
                     </div>
-                    <Badge variant="outline" className="rounded-lg border-slate-200 bg-white text-[10px] font-bold py-1 px-3">
+                    <Badge variant="outline" className="rounded-md border-slate-600 bg-slate-800 text-[9px] font-bold py-0.5 px-2 text-gray-300">
                       {slot.slot_type.toUpperCase()}
                     </Badge>
                   </div>
                 </div>
 
-                <div className="mt-8">
-                  <Button 
-                    className="w-full rounded-2xl h-14 font-black shadow-xl shadow-primary/20 hover:shadow-primary/30 transition-all active:scale-95 disabled:opacity-50"
+                <div className="mt-4">
+                  <Button
+                    className="w-full rounded-xl h-10 font-bold text-xs shadow-lg shadow-indigo-500/20 bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 transition-all active:scale-95 disabled:opacity-50"
                     disabled={slot.status !== 'available'}
                   >
                     {slot.status === 'available' ? 'Book Now' : 'Not Available'}
