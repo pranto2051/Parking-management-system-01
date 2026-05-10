@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Button } from "@/components/shared/button";
 import { Card, CardContent } from "@/components/shared/card";
 import { Badge } from "@/components/shared/badge";
-import { StatsCard } from "@/components/shared/stats-card";
 import {
   MapPin,
   Clock,
@@ -28,6 +27,7 @@ import {
   Battery,
   Gauge,
   Star,
+  TrendingUp,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -416,91 +416,220 @@ export default function LandingPage() {
       </section>
 
       {/* Stats Banner */}
-      <section className="py-16 bg-slate-900/50 border-y border-slate-800 relative overflow-hidden">
+      <section className="py-20 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 border-y border-slate-700 relative overflow-hidden">
+        {/* Background orbs */}
+        <div className="absolute top-0 left-1/4 w-64 h-64 bg-indigo-500/10 rounded-full blur-[80px]" />
+        <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-[80px]" />
+
         {/* Animated gradient line */}
-        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 animate-pulse" />
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500" />
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <StatsCard
-                key={index}
-                title={stat.label}
-                value={stat.value}
-                icon={[<Car key="car" className="h-6 w-6" />, <Building2 key="building" className="h-6 w-6" />, <MapPinned key="map" className="h-6 w-6" />, <Smile key="smile" className="h-6 w-6" />][index]}
-                variant={["primary", "secondary", "accent", "info"][index] as "primary" | "secondary" | "accent" | "info"}
-                trend={stat.trend}
-                className="bg-slate-800/50 border-slate-700 hover:border-slate-600"
-              />
+              <div key={index} className={`relative group p-6 rounded-3xl transition-all duration-500 hover:-translate-y-2 ${
+                index === 0
+                  ? 'bg-gradient-to-b from-blue-600/20 to-slate-800/80 border border-blue-500/20 hover:border-blue-400/40'
+                  : index === 1
+                  ? 'bg-gradient-to-b from-emerald-600/20 to-slate-800/80 border border-emerald-500/20 hover:border-emerald-400/40'
+                  : index === 2
+                  ? 'bg-gradient-to-b from-rose-600/20 to-slate-800/80 border border-rose-500/20 hover:border-rose-400/40'
+                  : 'bg-gradient-to-b from-amber-600/20 to-slate-800/80 border border-amber-500/20 hover:border-amber-400/40'
+              }`}>
+                {/* Glow effect */}
+                <div className={`absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+                  index === 0 ? 'bg-blue-500 blur-md' : index === 1 ? 'bg-emerald-500 blur-md' : index === 2 ? 'bg-rose-500 blur-md' : 'bg-amber-500 blur-md'
+                }`} />
+
+                <div className="flex items-start justify-between relative">
+                  <div className="space-y-3">
+                    <p className={`text-sm font-semibold uppercase tracking-wider ${
+                      index === 0 ? 'text-blue-400' : index === 1 ? 'text-emerald-400' : index === 2 ? 'text-rose-400' : 'text-amber-400'
+                    }`}>{stat.label}</p>
+                    <p className="text-4xl font-extrabold text-white">{stat.value}</p>
+                    {stat.trend && (
+                      <div className="flex items-center gap-2">
+                        <span className={`flex items-center gap-1 px-2 py-1 rounded-full text-xs font-bold ${
+                          stat.trend.isPositive ? 'bg-emerald-500/20 text-emerald-400' : 'bg-rose-500/20 text-rose-400'
+                        }`}>
+                          <TrendingUp className={`h-3 w-3 ${!stat.trend.isPositive ? 'rotate-180' : ''}`} />
+                          {stat.trend.value}%
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className={`p-3 rounded-2xl transition-all duration-500 group-hover:scale-110 ${
+                    index === 0
+                      ? 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30'
+                      : index === 1
+                      ? 'bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30'
+                      : index === 2
+                      ? 'bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg shadow-rose-500/30'
+                      : 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/30'
+                  }`}>
+                    {[<Car className="h-6 w-6 text-white" />, <Building2 className="h-6 w-6 text-white" />, <MapPinned className="h-6 w-6 text-white" />, <Smile className="h-6 w-6 text-white" />][index]}
+                  </div>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-32 relative bg-slate-900">
-        <div className="container mx-auto px-4">
+      <section id="features" className="py-32 relative bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        {/* Background orbs */}
+        <div className="absolute top-40 left-10 w-72 h-72 bg-indigo-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-40 right-10 w-72 h-72 bg-purple-500/10 rounded-full blur-[100px]" />
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-20 space-y-4">
-            <Badge className="bg-indigo-500/10 text-indigo-300 border-indigo-500/20">Powerful Core</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white" suppressHydrationWarning>
-              Everything You Need for <span className="animated-gradient-text">Smart Parking</span>
+            <Badge className="bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 border border-indigo-500/30 backdrop-blur-sm">Powerful Core</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+              Everything You Need for <span className="text-white">Smart Parking</span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            <p className="text-gray-300 max-w-2xl mx-auto text-lg">
               Our platform provides comprehensive tools for managing and using parking facilities across Bangladesh.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card
-                key={index}
-                className={`group relative p-8 hover-lift feature-card bg-slate-800/50 border-slate-700 hover:border-indigo-500/50 backdrop-blur-sm`}
-              >
-                <CardContent className="p-0 space-y-6">
-                  <div className={`h-14 w-14 rounded-2xl ${feature.bg} flex items-center justify-center ${feature.text} transition-transform group-hover:scale-110 group-hover:rotate-6 feature-icon`}>
+              <div key={index} className="relative group">
+                {/* Card */}
+                <div className={`relative p-8 rounded-3xl transition-all duration-500 hover:-translate-y-3 ${
+                  index === 0
+                    ? 'bg-gradient-to-b from-blue-600/15 to-slate-800/80 border border-blue-500/20 hover:border-blue-400/40'
+                    : index === 1
+                    ? 'bg-gradient-to-b from-emerald-600/15 to-slate-800/80 border border-emerald-500/20 hover:border-emerald-400/40'
+                    : index === 2
+                    ? 'bg-gradient-to-b from-rose-600/15 to-slate-800/80 border border-rose-500/20 hover:border-rose-400/40'
+                    : index === 3
+                    ? 'bg-gradient-to-b from-indigo-600/15 to-slate-800/80 border border-indigo-500/20 hover:border-indigo-400/40'
+                    : index === 4
+                    ? 'bg-gradient-to-b from-amber-600/15 to-slate-800/80 border border-amber-500/20 hover:border-amber-400/40'
+                    : 'bg-gradient-to-b from-cyan-600/15 to-slate-800/80 border border-cyan-500/20 hover:border-cyan-400/40'
+                }`}>
+                  {/* Glow effect */}
+                  <div className={`absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+                    index === 0 ? 'bg-blue-500 blur-md' : index === 1 ? 'bg-emerald-500 blur-md' : index === 2 ? 'bg-rose-500 blur-md' : index === 3 ? 'bg-indigo-500 blur-md' : index === 4 ? 'bg-amber-500 blur-md' : 'bg-cyan-500 blur-md'
+                  }`} />
+
+                  {/* Icon */}
+                  <div className={`h-16 w-16 rounded-2xl flex items-center justify-center mb-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6 ${
+                    index === 0
+                      ? 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30'
+                      : index === 1
+                      ? 'bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30'
+                      : index === 2
+                      ? 'bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg shadow-rose-500/30'
+                      : index === 3
+                      ? 'bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/30'
+                      : index === 4
+                      ? 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/30'
+                      : 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/30'
+                  }`}>
                     {feature.icon}
                   </div>
-                  <div className="space-y-3">
-                    <h3 className="text-xl font-bold text-white group-hover:text-indigo-400 transition-colors">{feature.title}</h3>
-                    <p className="text-slate-400 leading-relaxed">{feature.description}</p>
+
+                  <div className="space-y-3 relative z-10">
+                    <h3 className={`text-xl font-bold transition-colors ${
+                      index === 0 ? 'text-blue-400 group-hover:text-blue-300' :
+                      index === 1 ? 'text-emerald-400 group-hover:text-emerald-300' :
+                      index === 2 ? 'text-rose-400 group-hover:text-rose-300' :
+                      index === 3 ? 'text-indigo-400 group-hover:text-indigo-300' :
+                      index === 4 ? 'text-amber-400 group-hover:text-amber-300' :
+                      'text-cyan-400 group-hover:text-cyan-300'
+                    }`}>{feature.title}</h3>
+                    <p className="text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors">{feature.description}</p>
                   </div>
-                  <div className="pt-4 border-t border-slate-700 flex items-center text-sm font-bold text-indigo-400 opacity-0 group-hover:opacity-100 transition-opacity">
+
+                  <div className={`pt-4 border-t border-slate-700 flex items-center text-sm font-bold opacity-0 group-hover:opacity-100 transition-all duration-500 ${
+                    index === 0 ? 'text-blue-400' : index === 1 ? 'text-emerald-400' : index === 2 ? 'text-rose-400' : index === 3 ? 'text-indigo-400' : index === 4 ? 'text-amber-400' : 'text-cyan-400'
+                  }`}>
                     Learn more <ChevronRight className="ml-1 h-4 w-4" />
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section id="how-it-works" className="py-32 bg-slate-800/30 relative">
-        <div className="container mx-auto px-4">
+      <section id="how-it-works" className="py-32 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 relative">
+        {/* Background orbs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-emerald-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-cyan-500/10 rounded-full blur-[100px]" />
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-20 space-y-4">
-            <Badge className="bg-emerald-500/10 text-emerald-400 border-emerald-500/20">Seamless Process</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
+            <Badge className="bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 text-emerald-300 border border-emerald-500/30 backdrop-blur-sm">Seamless Process</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold">
               Simple Steps to <span className="text-emerald-400">Get Started</span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            <p className="text-gray-300 max-w-2xl mx-auto text-lg">
               Join our platform in minutes and start your stress-free parking journey.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {howItWorks.map((step, index) => (
               <div key={index} className="relative group">
-                <Card className="p-10 h-full bg-slate-800/50 border-slate-700 hover:border-emerald-500/50 backdrop-blur-sm hover:bg-slate-800 transition-all duration-500 hover:-translate-y-2">
-                  <CardContent className="p-0 flex flex-col h-full">
-                    <div className={`text-7xl font-black bg-clip-text text-transparent bg-linear-to-br ${step.gradient} opacity-20 mb-6 group-hover:opacity-40 transition-opacity`}>
-                      {step.step}
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-4">{step.title}</h3>
-                    <p className="text-slate-400 leading-relaxed mb-8 grow">{step.description}</p>
-                    <div className={`h-1.5 w-12 rounded-full bg-linear-to-r ${step.gradient}`} />
-                  </CardContent>
-                </Card>
+                {/* Card with gradient based on index */}
+                <div className={`relative p-8 rounded-3xl transition-all duration-500 hover:-translate-y-3 ${
+                  index === 0
+                    ? 'bg-gradient-to-b from-blue-600/20 to-slate-800/80 border border-blue-500/20 hover:border-blue-400/40'
+                    : index === 1
+                    ? 'bg-gradient-to-b from-emerald-600/20 to-slate-800/80 border border-emerald-500/20 hover:border-emerald-400/40'
+                    : index === 2
+                    ? 'bg-gradient-to-b from-rose-600/20 to-slate-800/80 border border-rose-500/20 hover:border-rose-400/40'
+                    : 'bg-gradient-to-b from-amber-600/20 to-slate-800/80 border border-amber-500/20 hover:border-amber-400/40'
+                }`}>
+                  {/* Glow effect */}
+                  <div className={`absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+                    index === 0 ? 'bg-blue-500 blur-md' : index === 1 ? 'bg-emerald-500 blur-md' : index === 2 ? 'bg-rose-500 blur-md' : 'bg-amber-500 blur-md'
+                  }`} />
+
+                  {/* Step number with gradient */}
+                  <div className={`text-8xl font-black bg-clip-text text-transparent bg-linear-to-br ${step.gradient} opacity-15 mb-6 group-hover:opacity-30 transition-all duration-500 group-hover:scale-110`}>
+                    {step.step}
+                  </div>
+
+                  {/* Icon */}
+                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 ${
+                    index === 0
+                      ? 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30'
+                      : index === 1
+                      ? 'bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30'
+                      : index === 2
+                      ? 'bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg shadow-rose-500/30'
+                      : 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/30'
+                  }`}>
+                    {index === 0 ? <Users className="h-7 w-7 text-white" /> :
+                     index === 1 ? <MapPin className="h-7 w-7 text-white" /> :
+                     index === 2 ? <CreditCard className="h-7 w-7 text-white" /> :
+                     <Car className="h-7 w-7 text-white" />}
+                  </div>
+
+                  <h3 className="text-xl font-bold text-white mb-3">{step.title}</h3>
+                  <p className="text-gray-400 leading-relaxed mb-6 group-hover:text-gray-300 transition-colors">{step.description}</p>
+
+                  {/* Progress bar */}
+                  <div className={`h-1.5 w-16 rounded-full bg-linear-to-r ${step.gradient}`} />
+                </div>
+
+                {/* Arrow connector */}
                 {index < howItWorks.length - 1 && (
                   <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2 z-10">
-                    <div className="h-8 w-8 rounded-full bg-slate-800 border border-slate-700 shadow-sm flex items-center justify-center">
-                      <ChevronRight className="h-5 w-5 text-slate-400" />
+                    <div className={`h-10 w-10 rounded-full flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
+                      index === 0
+                        ? 'bg-blue-500/20 border border-blue-500/30'
+                        : index === 1
+                        ? 'bg-emerald-500/20 border border-emerald-500/30'
+                        : 'bg-rose-500/20 border border-rose-500/30'
+                    }`}>
+                      <ArrowRight className={`h-5 w-5 ${
+                        index === 0 ? 'text-blue-400' : index === 1 ? 'text-emerald-400' : 'text-rose-400'
+                      }`} />
                     </div>
                   </div>
                 )}
@@ -511,34 +640,82 @@ export default function LandingPage() {
       </section>
 
       {/* Coverage Section */}
-      <section id="coverage" className="py-32 bg-slate-900">
-        <div className="container mx-auto px-4">
+      <section id="coverage" className="py-32 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        {/* Background orbs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-rose-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-pink-500/10 rounded-full blur-[100px]" />
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-20 space-y-4">
-            <Badge className="bg-rose-500/10 text-rose-400 border-rose-500/20">Nationwide Network</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold text-white">
+            <Badge className="bg-gradient-to-r from-rose-500/20 to-pink-500/20 text-rose-300 border border-rose-500/30 backdrop-blur-sm">Nationwide Network</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold">
               Present Across <span className="text-rose-400">Bangladesh</span>
             </h2>
-            <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+            <p className="text-gray-300 max-w-2xl mx-auto text-lg">
               Expanding rapidly to provide secure parking in every corner of the country.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             {divisions.map((division, index) => (
-              <div key={index} className="group cursor-pointer">
-                <Card className="p-6 flex items-center justify-between bg-slate-800/50 border-slate-700 hover:border-rose-500/50 backdrop-blur-sm transition-all duration-300 hover:-translate-y-2">
-                  <div className="flex items-center gap-4">
-                    <div className={`h-12 w-12 rounded-2xl ${division.color} flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform`}>
-                      <MapPin className="h-6 w-6" />
+              <div key={index} className="relative group">
+                {/* Card */}
+                <div className={`relative p-6 rounded-3xl flex items-center justify-between transition-all duration-500 hover:-translate-y-3 ${
+                  index === 0
+                    ? 'bg-gradient-to-b from-blue-600/15 to-slate-800/80 border border-blue-500/20 hover:border-blue-400/40'
+                    : index === 1
+                    ? 'bg-gradient-to-b from-emerald-600/15 to-slate-800/80 border border-emerald-500/20 hover:border-emerald-400/40'
+                    : index === 2
+                    ? 'bg-gradient-to-b from-rose-600/15 to-slate-800/80 border border-rose-500/20 hover:border-rose-400/40'
+                    : index === 3
+                    ? 'bg-gradient-to-b from-amber-600/15 to-slate-800/80 border border-amber-500/20 hover:border-amber-400/40'
+                    : index === 4
+                    ? 'bg-gradient-to-b from-indigo-600/15 to-slate-800/80 border border-indigo-500/20 hover:border-indigo-400/40'
+                    : 'bg-gradient-to-b from-cyan-600/15 to-slate-800/80 border border-cyan-500/20 hover:border-cyan-400/40'
+                }`}>
+                  {/* Glow effect */}
+                  <div className={`absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+                    index === 0 ? 'bg-blue-500 blur-md' : index === 1 ? 'bg-emerald-500 blur-md' : index === 2 ? 'bg-rose-500 blur-md' : index === 3 ? 'bg-amber-500 blur-md' : index === 4 ? 'bg-indigo-500 blur-md' : 'bg-cyan-500 blur-md'
+                  }`} />
+
+                  <div className="flex items-center gap-4 relative z-10">
+                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 ${
+                      index === 0
+                        ? 'bg-gradient-to-br from-blue-500 to-indigo-600 shadow-lg shadow-blue-500/30'
+                        : index === 1
+                        ? 'bg-gradient-to-br from-emerald-500 to-teal-600 shadow-lg shadow-emerald-500/30'
+                        : index === 2
+                        ? 'bg-gradient-to-br from-rose-500 to-pink-600 shadow-lg shadow-rose-500/30'
+                        : index === 3
+                        ? 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/30'
+                        : index === 4
+                        ? 'bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/30'
+                        : 'bg-gradient-to-br from-cyan-500 to-blue-600 shadow-lg shadow-cyan-500/30'
+                    }`}>
+                      <MapPin className="h-6 w-6 text-white" />
                     </div>
                     <div>
                       <h3 className="text-lg font-bold text-white">{division.name}</h3>
-                      <p className="text-sm text-slate-400 font-medium">{division.zones} active zones</p>
+                      <p className="text-sm text-gray-400 font-medium">{division.zones} active zones</p>
                     </div>
                   </div>
-                  <div className="h-8 w-8 rounded-full bg-slate-700 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                    <ChevronRight className="h-4 w-4 text-rose-400" />
+                  <div className={`h-10 w-10 rounded-2xl flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 group-hover:scale-110 ${
+                    index === 0
+                      ? 'bg-blue-500/20'
+                      : index === 1
+                      ? 'bg-emerald-500/20'
+                      : index === 2
+                      ? 'bg-rose-500/20'
+                      : index === 3
+                      ? 'bg-amber-500/20'
+                      : index === 4
+                      ? 'bg-indigo-500/20'
+                      : 'bg-cyan-500/20'
+                  }`}>
+                    <ArrowRight className={`h-5 w-5 ${
+                      index === 0 ? 'text-blue-400' : index === 1 ? 'text-emerald-400' : index === 2 ? 'text-rose-400' : index === 3 ? 'text-amber-400' : index === 4 ? 'text-indigo-400' : 'text-cyan-400'
+                    }`} />
                   </div>
-                </Card>
+                </div>
               </div>
             ))}
           </div>
@@ -597,7 +774,7 @@ export default function LandingPage() {
 
                   {plan.popular && (
                     <div className="absolute -top-5 left-1/2 transform -translate-x-1/2 z-10">
-                      <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white text-[10px] font-black uppercase tracking-widest px-5 py-2 rounded-full shadow-lg shadow-orange-500/50 flex items-center gap-2">
+                      <div className="bg-gradient-to-r from-yellow-400 via-orange-500 to-red-500 text-white text-[10px] font-black uppercase tracking-widest px-5 py-2 rounded-full shadow-lg shadow-orange-500/50 flex items-center gap-2 whitespace-nowrap">
                         <Star className="h-3 w-3 fill-white" />
                         Most Popular
                       </div>
@@ -666,11 +843,15 @@ export default function LandingPage() {
       </section>
 
       {/* Testimonials */}
-      <section className="py-32 relative overflow-hidden bg-slate-900">
-        <div className="container mx-auto px-4">
+      <section className="py-32 relative overflow-hidden bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        {/* Background orbs */}
+        <div className="absolute top-20 left-10 w-72 h-72 bg-amber-500/10 rounded-full blur-[100px]" />
+        <div className="absolute bottom-20 right-10 w-72 h-72 bg-orange-500/10 rounded-full blur-[100px]" />
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-20">
-            <Badge className="bg-amber-500/10 text-amber-400 border-amber-500/20">User Testimonials</Badge>
-            <h2 className="text-4xl md:text-5xl font-bold mt-4 tracking-tight text-white">Trusted by <span className="text-amber-400">Thousands</span></h2>
+            <Badge className="bg-gradient-to-r from-amber-500/20 to-orange-500/20 text-amber-300 border border-amber-500/30 backdrop-blur-sm">User Testimonials</Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mt-4 tracking-tight">Trusted by <span className="text-amber-400">Thousands</span></h2>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
             {[
@@ -678,21 +859,48 @@ export default function LandingPage() {
               { name: "Sarah Islam", role: "Business Owner", quote: "Managing my building&apos;s parking has never been easier. The sub-admin dashboard is a lifesaver." },
               { name: "Tanvir Ahmed", role: "App User", quote: "The real-time availability feature is incredibly accurate. Best utility app in Bangladesh!" }
             ].map((t, i) => (
-              <Card key={i} className="p-8 hover-lift bg-slate-800/50 border-slate-700 hover:border-amber-500/50 backdrop-blur-sm transition-all duration-300">
-                <div className="flex gap-1 text-amber-400 mb-6">
-                  {[1, 2, 3, 4, 5].map(star => <Zap key={star} className="h-4 w-4 fill-current" />)}
-                </div>
-                <p className="text-lg font-medium text-slate-300 italic mb-8">&quot;{t.quote}&quot;</p>
-                <div className="flex items-center gap-4">
-                  <div className="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold">
-                    {t.name.charAt(0)}
+              <div key={i} className="relative group">
+                {/* Card */}
+                <div className={`relative p-8 rounded-3xl transition-all duration-500 hover:-translate-y-3 ${
+                  i === 0
+                    ? 'bg-gradient-to-b from-amber-600/15 to-slate-800/80 border border-amber-500/20 hover:border-amber-400/40'
+                    : i === 1
+                    ? 'bg-gradient-to-b from-orange-600/15 to-slate-800/80 border border-orange-500/20 hover:border-orange-400/40'
+                    : 'bg-gradient-to-b from-yellow-600/15 to-slate-800/80 border border-yellow-500/20 hover:border-yellow-400/40'
+                }`}>
+                  {/* Glow effect */}
+                  <div className={`absolute -inset-0.5 rounded-3xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 ${
+                    i === 0 ? 'bg-amber-500 blur-md' : i === 1 ? 'bg-orange-500 blur-md' : 'bg-yellow-500 blur-md'
+                  }`} />
+
+                  {/* Stars */}
+                  <div className="flex gap-1 mb-6 relative z-10">
+                    {[1, 2, 3, 4, 5].map(star => (
+                      <Star key={star} className={`h-5 w-5 ${
+                        i === 0 ? 'text-amber-400' : i === 1 ? 'text-orange-400' : 'text-yellow-400'
+                      } fill-current`} />
+                    ))}
                   </div>
-                  <div>
-                    <p className="font-bold text-white">{t.name}</p>
-                    <p className="text-sm text-slate-400 font-medium">{t.role}</p>
+
+                  <p className="text-lg font-medium text-gray-300 italic mb-8 relative z-10">&quot;{t.quote}&quot;</p>
+
+                  <div className="flex items-center gap-4 relative z-10">
+                    <div className={`h-14 w-14 rounded-2xl flex items-center justify-center text-white font-bold text-xl ${
+                      i === 0
+                        ? 'bg-gradient-to-br from-amber-500 to-orange-600 shadow-lg shadow-amber-500/30'
+                        : i === 1
+                        ? 'bg-gradient-to-br from-orange-500 to-red-600 shadow-lg shadow-orange-500/30'
+                        : 'bg-gradient-to-br from-yellow-500 to-amber-600 shadow-lg shadow-yellow-500/30'
+                    }`}>
+                      {t.name.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-bold text-white text-lg">{t.name}</p>
+                      <p className="text-sm text-gray-400 font-medium">{t.role}</p>
+                    </div>
                   </div>
                 </div>
-              </Card>
+              </div>
             ))}
           </div>
         </div>
