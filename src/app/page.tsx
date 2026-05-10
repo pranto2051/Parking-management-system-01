@@ -12,6 +12,9 @@ import {
   BarChart3,
   Smartphone,
   Car,
+  Bike,
+  Truck,
+  Bus,
   ChevronRight,
   Zap,
   CheckCircle2,
@@ -122,7 +125,7 @@ const pricingPlans = [
   },
   {
     type: "Bike",
-    icon: <Car className="h-8 w-8" />,
+    icon: <Bike className="h-8 w-8" />,
     price: "500",
     period: "/month",
     features: ["Dedicated bike parking", "Locking facility", "24/7 access", "Secure area"],
@@ -132,7 +135,7 @@ const pricingPlans = [
   },
   {
     type: "Truck",
-    icon: <Car className="h-8 w-8" />,
+    icon: <Truck className="h-8 w-8" />,
     price: "8,000",
     period: "/month",
     features: ["Large space", "Loading area", "24/7 access", "Security guard"],
@@ -142,7 +145,7 @@ const pricingPlans = [
   },
   {
     type: "Bus",
-    icon: <Car className="h-8 w-8" />,
+    icon: <Bus className="h-8 w-8" />,
     price: "15,000",
     period: "/month",
     features: ["Dedicated bus lane", "Wide space", "24/7 access", "Security guard"],
